@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form>
+      <input type="email" name="email" id="email" placeholder="Email" />
+      <input type="password" placeholder="Password" id="pass" />
+      <input type="submit" value="Login" />
+    </form>
+  </body>
+</html>
+<script>
+  //   document.querySelector("form").addEventListener("submit", signUp);
+
+  let userArr = JSON.parse(localStorage.getItem("users")) || [];
+  document.querySelector("form").addEventListener("submit", signIn);
+
+  function signIn() {
+    event.preventDefault();
+    let obj = {
+      enteredEmail: document.querySelector("#email").value,
+      enteredPass: document.querySelector("#pass").value,
+    };
+    let isSignedin = false;
+    userArr.forEach(function (ele) {
+      if (ele.email === obj.enteredEmail && ele.Password === obj.enteredPass) {
+        localStorage.setItem("signin", JSON.stringify(ele));
+        isSignedin = true;
+        window.location.href = "index.html";
+        // console.log(ele.name);
+      }
+    });
+    if (isSignedin === false) {
+      alert("user not exist");
+      return;
+    }
+  }
+</script>

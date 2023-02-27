@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" name="name" id="name" placeholder="Name" />
+      <input type="email" name="email" id="email" placeholder="Email" />
+      <input
+        type="password"
+        placeholder="Password"
+        id="pass"
+        autocomplete="on"
+      />
+      <input type="submit" value="Signup" />
+    </form>
+  </body>
+</html>
+<script>
+  document.querySelector("form").addEventListener("submit", signUp);
+
+  let userArr = JSON.parse(localStorage.getItem("users")) || [];
+  function signUp() {
+    event.preventDefault();
+    console.log("object");
+    let userObj = {
+      name: document.querySelector("#name").value,
+      email: document.querySelector("#email").value,
+      Password: document.querySelector("#pass").value,
+    };
+    console.log(userObj);
+    userArr.push(userObj);
+    localStorage.setItem("users", JSON.stringify(userArr));
+    window.location.href = "login.html";
+  }
+</script>

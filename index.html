@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eMart</title>
+    <style>
+      #logout {
+        margin-left: 80px;
+      }
+      #cart {
+        margin-left: 80px;
+      }
+      #container {
+        display: flex;
+      }
+      img {
+        height: 300px;
+        width: auto;
+      }
+      .containerBody {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        border: 2px solid red;
+        gap: 50px;
+      }
+      #btn {
+        color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h3 id="userName">Welcome</h3>
+      <select id="filter">
+        <option value="SelectCategory">Select Category</option>
+        <option value="bottomwear">Bottomwear</option>
+        <option value="partywear">Partywear</option>
+        <option value="casual">Casual</option>
+      </select>
+      <button id="logout">Logout</button>
+      <button id="cart">Cart</button>
+    </div>
+
+    <div class="containerBody"></div>
+  </body>
+</html>
+<script>
+  let product_data = [
+    {
+      productId: "01",
+      brand: "Puma",
+      price: "2000",
+      dressName: "Designer Kurta",
+      catagory: "partywear",
+      size: "x,xx,xxl",
+      img: "https://assets.ajio.com/medias/sys_master/root/20230103/wpvo/63b35366f997ddfdbd0b993f/-473Wx593H-465410816-burgundy-MODEL.jpg",
+    },
+    {
+      productId: "02",
+      brand: "john Player",
+      price: "1999",
+      dressName: "Jeans",
+      catagory: "bottomwear",
+      size: "x,xx,xxl",
+      img: "https://assets.ajio.com/medias/sys_master/root/20221209/loV6/63934e08aeb269659ce07dff/-473Wx593H-420180409-blue-MODEL.jpg",
+    },
+    {
+      productId: "03",
+      brand: "H&M",
+      price: "2999",
+      dressName: "SweatShirt",
+      catagory: "bottomwear",
+      size: "x,xx,xxl",
+      img: "https://assets.ajio.com/medias/sys_master/root/20230126/J0Py/63d21b80aeb269c651fb84e4/-473Wx593H-465194215-white-MODEL.jpg",
+    },
+    {
+      productId: "04",
+      brand: "Aaboli",
+      price: "1499",
+      dressName: "Kurta",
+      catagory: "casual",
+      size: "x,xx,xxl",
+      img: "https://assets.ajio.com/medias/sys_master/root/20220916/0fP8/63238bcdaeb269dbb38e00de/-473Wx593H-465000355-green-MODEL2.jpg",
+    },
+  ];
+</script>
+<script>
+  document.querySelector("#filter").addEventListener("change", filterCategory);
+  document.querySelector("#cart").addEventListener("click", myCart);
+  document.querySelector("#logout").addEventListener("click", logoutFun);
+
+  let arr = [];
+  let cartLS = JSON.parse(localStorage.getItem("cart-product")) || [];
+  // console.log(cartLS);
+
+  displayData(product_data);
+
+  // filter
+  function filterCategory() {
+    let res = product_data.filter(function (ele) {
+      if (event.target.value == "SelectCategory") {
+        return product_data;
+      }
+      return ele.catagory == event.target.value;
+    });
+    console.log(res);
+    displayData(res);
+  }
+  // prodduct Display
+  function displayData(product_data) {
+    document.querySelector(".containerBody").innerHTML = "";
+    product_data.forEach(function (ele) {
+      let cardContainer = document.createElement("div");
+      cardContainer.setAttribute("class", "cardContainer");
+      let image = document.createElement("img");
+      image.src = ele.img;
+      let name = document.createElement("h3");
+      name.innerText = ele.dressName;
+      let price = document.createElement("p");
+      price.innerText = "Price" + " " + ele.price;
+      let cart = document.createElement("button");
+      cart.innerText = "Add To cart";
+      cart.addEventListener("click", function () {
+        addToCart(ele);
+      });
+
+      cardContainer.append(image, name, price, cart);
+      document.querySelector(".containerBody").append(cardContainer);
+    });
+  }
+
+  function addToCart(product) {
+    isAdded = false;
+    cartLS.forEach(function (ele) {
+      if (ele.productId === product.productId) {
+        isAdded = true;
+        alert("Item is alredy present in cart");
+        console.log("Item is alredy present in cart");
+      }
+    });
+    if (isAdded == false) {
+      cartLS.push(product);
+      localStorage.setItem("cart-product", JSON.stringify(cartLS));
+      alert("Product is added successfully");
+    }
+  }
+
+  // logout Function
+  function logoutFun() {
+    localStorage.removeItem("signin");
+    window.location.href = "login.html";
+  }
+
+  // Cart Function
+  function myCart() {
+    // console.log("object");
+    window.location.href = "cart.html";
+  }
+
+  let signIn = JSON.parse(localStorage.getItem("signin"));
+  document.querySelector("#userName").innerText = "Welcome" + " " + signIn.name;
+</script>

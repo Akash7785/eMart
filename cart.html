@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+    <style>
+      #logout {
+        margin-left: 80px;
+      }
+      #cart {
+        margin-left: 80px;
+      }
+      #container {
+        display: flex;
+      }
+      img {
+        height: 300px;
+        width: auto;
+      }
+      .containerBody {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        border: 2px solid red;
+        gap: 50px;
+      }
+      #btn {
+        color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to cart page</h1>
+    <h3>Total Cart Value <span id="total-price">0</span></h3>
+    <button id="logout">Logout</button>
+    <div class="containerBody"></div>
+  </body>
+</html>
+<script>
+  cartProd = JSON.parse(localStorage.getItem("cart-product"));
+
+  cartDisplay();
+  function cartDisplay() {
+    document.querySelector(".containerBody").innerHTML = "";
+    // let total = 0;
+    cartProd.forEach(function (ele, index) {
+      // let totalPrice = total + Number(ele.price);
+      let cardContainer = document.createElement("div");
+      cardContainer.setAttribute("class", "cardContainer");
+      let image = document.createElement("img");
+      image.src = ele.img;
+      let name = document.createElement("h3");
+      name.innerText = ele.dressName;
+      let price = document.createElement("p");
+      price.innerText = "Price" + " " + ele.price;
+      let cart = document.createElement("button");
+      cart.innerText = "Remove";
+      cart.addEventListener("click", function () {
+        removeItem(ele, index);
+      });
+
+      cardContainer.append(image, name, price, cart);
+      document.querySelector(".containerBody").append(cardContainer);
+    });
+  }
+
+  function removeItem(ele, index) {
+    cartProd.splice(index, 1);
+    console.log(index);
+
+    console.log(cartProd);
+    let updatedCart = localStorage.setItem(
+      "cart-product",
+      JSON.stringify(cartProd)
+    );
+    cartDisplay(updatedCart);
+  }
+</script>

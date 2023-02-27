@@ -1,0 +1,32 @@
+let obj =[{
+	
+	brand:"Puma",
+
+	price:"2000",
+	dressName:"Designer Kurta",
+	catagory:"topwear",
+	size:"x,xx,xxl",
+	img="https://assets.ajio.com/medias/sys_master/root/20230103/wpvo/63b35366			f997ddfdbd0b993f/-473Wx593H-465410816-burgundy-MODEL.jpg",
+
+	brand:"john Player",
+	price:"1999",
+	dressName:"Jeans",
+	catagory:"bottomwear",
+	size:"x,xx,xxl",
+	img="https://assets.ajio.com/medias/sys_master/root/20221209/loV6/63934e08aeb269659ce07dff/-473Wx593H-420180409-blue-MODEL.jpg",	
+
+
+	brand:"H&M",
+	price:"2999",
+	dressName:"SweatShirt",
+	catagory:"topwear",
+	size:"x,xx,xxl",
+	img="https://assets.ajio.com/medias/sys_master/root/20230126/cExa/63d21b80aeb269c651fb8478/-473Wx593H-465194215-white-MODEL3.jpg",	
+
+	brand:"Aaboli",
+	price:"1499",
+	dressName:"Kurta",
+	catagory:"topwear",
+	size:"x,xx,xxl",
+	img="https://assets.ajio.com/medias/sys_master/root/20220916/0fP8/63238bcdaeb269dbb38e00de/-473Wx593H-465000355-green-MODEL2.jpg",	
+}];
